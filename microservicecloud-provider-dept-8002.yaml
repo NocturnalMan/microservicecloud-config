@@ -1,0 +1,40 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: microservicecloud-dept
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource                #连接池类型
+    driver-class-name: com.mysql.cj.jdbc.Driver                 #连接驱动
+    url: jdbc:mysql://localhost:3306/cloudDB02                  #数据库名
+    username: root
+    password: zhangjungao
+    dbcp2:
+      min-idle: 5                                               #连接池最小维持连接数
+      initial-size: 5                                           #初始连接数
+      max-idle: 5                                               #连接池最大维持连接数
+      max-wait-millis: 200                                      #等待连接获取的最大超时时间
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-cfg.xml            #mybatis配置文件路径
+  type-aliases-package: com.nocturnalgao.cloud.domain.entity    #为实体类设置别名
+  mapper-locations: classpath:mybatis/mapping/*Mapper.xml       #mapper.xml文件路径
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka            #单机
+      #defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+                                                                #将客户端注册到eureka集群的服务列表内
+  instance:
+    instance-id: microservicecloud-dept8002                     #在eureka服务列表中状态下的名字
+    prefer-ip-address: true                                     #是否显示微服务所在设备ip
+
+info:
+  app.name: nocturnalgao-microservicecloud
+  app.maker: NocturnalGao
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+
+
